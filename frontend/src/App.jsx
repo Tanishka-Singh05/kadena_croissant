@@ -4,12 +4,16 @@ import Header from './components/Header'
 import Dashboard from './components/Dashboard'
 import WalletConnect from './components/WalletConnect'
 import { WalletProvider } from './contexts/WalletContext'
+import { ActivityProvider } from './contexts/ActivityContext'
+import { ReputationProvider } from './contexts/ReputationContext'
 
 function App() {
   const [isConnected, setIsConnected] = useState(false)
 
   return (
     <WalletProvider>
+      <ActivityProvider>
+        <ReputationProvider>
       <div className="min-h-screen bg-gradient-to-br from-primary-50 via-secondary-light to-primary-100">
         <Header />
 
@@ -94,6 +98,7 @@ function App() {
           </motion.div>
         </main>
       </div>
+      </ActivityProvider>
     </WalletProvider>
   )
 }

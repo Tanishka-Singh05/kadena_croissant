@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useWallet } from '../contexts/WalletContext'
+import { useActivity } from '../contexts/ActivityContext'
 import { ethers } from 'ethers'
 
 const TestTransaction = ({ selectedChain }) => {
   const { account, provider, chainId, switchChain } = useWallet()
+  const { addActivity, calculateReputationPoints, getChainName } = useActivity()
   const [isLoading, setIsLoading] = useState(false)
   const [txHash, setTxHash] = useState(null)
   const [error, setError] = useState(null)
   const [showDetails, setShowDetails] = useState(false)
+  const [earnedPoints, setEarnedPoints] = useState(0)
 
   const getChainDescription = (chain) => {
     const descriptions = {
@@ -90,8 +93,29 @@ const TestTransaction = ({ selectedChain }) => {
       // Wait for confirmation
       const receipt = await tx.wait()
 
-      // Simulate reputation update
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // Calculate reputation points and record activity
+      const points = calculateReputationPoints(selectedChain, tx.hash)
+      setEarnedPoints(points)
+
+      const activityType = selectedChain === 5920 ? 'defi' :
+                          selectedChain === 5921 ? 'gaming' : 'development'
+
+      // Record the activity
+      addActivity({
+        type: activityType,
+        description: chainDesc.activity,
+        points: points,
+        txHash: tx.hash,
+        chainId: selectedChain,
+        chainName: getChainName(selectedChain),
+        value: ethers.formatEther(tx.value),
+        blockNumber: receipt.blockNumber,
+        gasUsed: receipt.gasUsed.toString(),
+        status: 'confirmed'
+      })
+
+      // Brief delay for UI feedback
+      await new Promise(resolve => setTimeout(resolve, 1000))
 
       setShowDetails(true)
 
@@ -228,13 +252,13 @@ const TestTransaction = ({ selectedChain }) => {
 
               <div className="flex items-center space-x-2">
                 <span className="text-xs text-green-700">Reputation Update:</span>
-                <span className="text-xs font-semibold text-green-800">+{Math.floor(Math.random() * 50) + 10} points</span>
+                <span className="text-xs font-semibold text-green-800">+{earnedPoints} points</span>
               </div>
             </div>
 
             {/* View on Explorer */}
             <motion.a
-              href={`https://chain-${selectedChain}.evm-testnet-blockscout.chainweb.com/tx/${txHash}`}
+              href={`https://chain-${selectedChain === 5920 ? '20' : selectedChain === 5921 ? '21' : '22'}.evm-testnet-blockscout.chainweb.com/tx/${txHash}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-1 text-xs text-green-700 hover:text-green-800 mt-2"
