@@ -98,21 +98,40 @@ export const WalletProvider = ({ children }) => {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: chainConfig.chainId }]
       })
+
+      // Wait for provider and network to update after chain switch
+      await new Promise(resolve => setTimeout(resolve, 700))
+
+      // Optionally, re-initialize provider and chainId
+      if (window.ethereum) {
+        const provider = new ethers.BrowserProvider(window.ethereum)
+        const network = await provider.getNetwork()
+        setProvider(provider)
+        setChainId(Number(network.chainId))
+      }
     } catch (switchError) {
-      // If chain doesn't exist, add it
+      // Log full error for debugging
+      console.error('Switch chain error:', switchError)
       if (switchError.code === 4902) {
         try {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [chainConfig]
           })
+          // Wait for provider and network to update after adding chain
+          await new Promise(resolve => setTimeout(resolve, 700))
+          if (window.ethereum) {
+            const provider = new ethers.BrowserProvider(window.ethereum)
+            const network = await provider.getNetwork()
+            setProvider(provider)
+            setChainId(Number(network.chainId))
+          }
         } catch (addError) {
-          console.error('Failed to add chain:', addError)
-          setError('Failed to add Kadena network')
+          console.error('Add chain error:', addError)
+          setError('Failed to add Kadena network: ' + (addError.message || JSON.stringify(addError)))
         }
       } else {
-        console.error('Failed to switch chain:', switchError)
-        setError('Failed to switch network')
+        setError(`Failed to switch network: ${switchError.message || JSON.stringify(switchError)}`)
       }
     }
   }

@@ -53,35 +53,30 @@ const TestTransaction = ({ selectedChain }) => {
     setTxHash(null)
 
     try {
+      // Wait for provider to update after chain switch
+      await new Promise(resolve => setTimeout(resolve, 500))
       const signer = await provider.getSigner()
 
-      // Create different transaction types based on the chain/domain
+      // Use the user's own address for test transactions
+      const testAddress = account
       let tx
 
       if (selectedChain === 5920) {
-        // DeFi Chain: Simple transfer to a different address (simulating a trade)
-        const testAddress = "0x0000000000000000000000000000000000000001" // Burn address
         tx = await signer.sendTransaction({
           to: testAddress,
-          value: ethers.parseEther('0.001'), // Small amount for testing
+          value: ethers.parseEther('0.001'),
         })
       } else if (selectedChain === 5921) {
-        // Gaming Chain: Simple transfer (simulating NFT/gaming transaction)
-        const testAddress = "0x0000000000000000000000000000000000000002" // Different burn address
         tx = await signer.sendTransaction({
           to: testAddress,
-          value: ethers.parseEther('0.0005'), // Smaller amount
+          value: ethers.parseEther('0.0005'),
         })
       } else if (selectedChain === 5922) {
-        // Dev Chain: Simple transfer (simulating contract interaction)
-        const testAddress = "0x0000000000000000000000000000000000000003" // Another burn address
         tx = await signer.sendTransaction({
           to: testAddress,
-          value: ethers.parseEther('0.0001'), // Very small amount
+          value: ethers.parseEther('0.0001'),
         })
       } else {
-        // Fallback for any other chain
-        const testAddress = "0x0000000000000000000000000000000000000001"
         tx = await signer.sendTransaction({
           to: testAddress,
           value: ethers.parseEther('0.001'),
@@ -100,7 +95,6 @@ const TestTransaction = ({ selectedChain }) => {
       const activityType = selectedChain === 5920 ? 'defi' :
                           selectedChain === 5921 ? 'gaming' : 'development'
 
-      // Record the activity
       addActivity({
         type: activityType,
         description: getChainDescription(selectedChain).activity,
@@ -114,7 +108,6 @@ const TestTransaction = ({ selectedChain }) => {
         status: 'confirmed'
       })
 
-      // Brief delay for UI feedback
       await new Promise(resolve => setTimeout(resolve, 1000))
 
       setShowDetails(true)
