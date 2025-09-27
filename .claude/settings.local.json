@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.kadena.io)",
+      "WebFetch(domain:api.chainweb.com)",
+      "WebSearch",
+      "WebFetch(domain:evm.kadena.io)",
+      "WebFetch(domain:docs.blockscout.com)",
+      "WebFetch(domain:chain-20.evm-testnet-blockscout.chainweb.com)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

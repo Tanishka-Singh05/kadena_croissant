@@ -1,0 +1,37 @@
+{
+  "name": "chainweb-zkrep",
+  "version": "1.0.0",
+  "description": "Multi-Chain ZK Reputation System for Kadena Chainweb",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "compile": "hardhat compile",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network kadena-testnet",
+    "test": "hardhat test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/user/chainweb-zkrep.git"
+  },
+  "keywords": [
+    "kadena",
+    "chainweb",
+    "reputation",
+    "zk-proofs",
+    "multi-chain",
+    "defi",
+    "gaming"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0"
+  }
+}

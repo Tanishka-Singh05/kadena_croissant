@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-primary-50 text-primary-800 font-sans;
+    background: linear-gradient(135deg, #F9E0D9 0%, #E6DBD0 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-soft;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-light hover:bg-secondary text-primary-700 border border-primary-300 px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 active:scale-95;
+  }
+
+  .card {
+    @apply bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-soft border border-primary-200/50;
+  }
+
+  .card-glass {
+    @apply bg-white/60 backdrop-blur-md rounded-xl p-6 shadow-glow border border-white/30;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-primary-300 bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-accent-brown bg-clip-text text-transparent;
+  }
+
+  .reputation-score {
+    @apply text-2xl font-bold text-gradient;
+  }
+
+  .chain-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-700 border border-primary-200;
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "chainweb-zkrep-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Chainweb ZK Reputation System",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ethers": "^6.8.0",
+    "axios": "^1.6.0",
+    "@tanstack/react-query": "^5.0.0",
+    "lucide-react": "^0.290.0",
+    "framer-motion": "^10.16.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.1.0",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "vite": "^4.5.0"
+  }
+}
