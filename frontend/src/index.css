@@ -4,7 +4,8 @@
 
 @layer base {
   * {
-    @apply border-border;
+    /* was: @apply border-border; */
+    @apply border-primary-200;
   }
 
   body {
