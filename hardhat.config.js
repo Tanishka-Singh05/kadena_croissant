@@ -14,19 +14,19 @@ module.exports = {
   },
   networks: {
     "kadena-chain20": {
-      url: "https://rpc.evm-testnet.kadena.io/rpc/chain/20",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 20,
+      url: "https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/20/evm/rpc",
+      accounts: process.env.PRIVATE_KEY && process.env.PRIVATE_KEY !== "your_private_key_here" ? [process.env.PRIVATE_KEY] : [],
+      chainId: 5920,
     },
     "kadena-chain21": {
-      url: "https://rpc.evm-testnet.kadena.io/rpc/chain/21",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 21,
+      url: "https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/21/evm/rpc",
+      accounts: process.env.PRIVATE_KEY && process.env.PRIVATE_KEY !== "your_private_key_here" ? [process.env.PRIVATE_KEY] : [],
+      chainId: 5921,
     },
     "kadena-chain22": {
-      url: "https://rpc.evm-testnet.kadena.io/rpc/chain/22",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 22,
+      url: "https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/22/evm/rpc",
+      accounts: process.env.PRIVATE_KEY && process.env.PRIVATE_KEY !== "your_private_key_here" ? [process.env.PRIVATE_KEY] : [],
+      chainId: 5922,
     },
   },
   etherscan: {

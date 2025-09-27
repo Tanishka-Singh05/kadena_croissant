@@ -8,7 +8,7 @@ import TestTransaction from './TestTransaction'
 
 const Dashboard = () => {
   const { account, chainId, isKadenaChain } = useWallet()
-  const [selectedChain, setSelectedChain] = useState(20)
+  const [selectedChain, setSelectedChain] = useState(5920)
   const [reputationData, setReputationData] = useState({
     defiScore: 0,
     gamingScore: 0,

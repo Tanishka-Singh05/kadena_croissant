@@ -19,37 +19,37 @@ export const WalletProvider = ({ children }) => {
   const [error, setError] = useState(null)
 
   const KADENA_NETWORKS = {
-    20: {
-      chainId: '0x14',
+    5920: {
+      chainId: '0x1720',
       chainName: 'Kadena EVM Chain 20 (DeFi)',
       nativeCurrency: {
         name: 'KDA',
         symbol: 'KDA',
         decimals: 18
       },
-      rpcUrls: ['https://rpc.evm-testnet.kadena.io/rpc/chain/20'],
+      rpcUrls: ['https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/20/evm/rpc'],
       blockExplorerUrls: ['https://chain-20.evm-testnet-blockscout.chainweb.com/']
     },
-    21: {
-      chainId: '0x15',
+    5921: {
+      chainId: '0x1721',
       chainName: 'Kadena EVM Chain 21 (Gaming)',
       nativeCurrency: {
         name: 'KDA',
         symbol: 'KDA',
         decimals: 18
       },
-      rpcUrls: ['https://rpc.evm-testnet.kadena.io/rpc/chain/21'],
+      rpcUrls: ['https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/21/evm/rpc'],
       blockExplorerUrls: ['https://chain-21.evm-testnet-blockscout.chainweb.com/']
     },
-    22: {
-      chainId: '0x16',
+    5922: {
+      chainId: '0x1722',
       chainName: 'Kadena EVM Chain 22 (Development)',
       nativeCurrency: {
         name: 'KDA',
         symbol: 'KDA',
         decimals: 18
       },
-      rpcUrls: ['https://rpc.evm-testnet.kadena.io/rpc/chain/22'],
+      rpcUrls: ['https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/22/evm/rpc'],
       blockExplorerUrls: ['https://chain-22.evm-testnet-blockscout.chainweb.com/']
     }
   }
@@ -75,9 +75,9 @@ export const WalletProvider = ({ children }) => {
       setProvider(provider)
       setChainId(Number(network.chainId))
 
-      // If not on a Kadena chain, prompt to switch to chain 20
-      if (![20, 21, 22].includes(Number(network.chainId))) {
-        await switchChain(20)
+      // If not on a Kadena chain, prompt to switch to chain 5920
+      if (![5920, 5921, 5922].includes(Number(network.chainId))) {
+        await switchChain(5920)
       }
     } catch (error) {
       console.error('Failed to connect wallet:', error)
@@ -126,15 +126,15 @@ export const WalletProvider = ({ children }) => {
 
   const getChainName = (chainId) => {
     const names = {
-      20: 'DeFi Chain',
-      21: 'Gaming Chain',
-      22: 'Development Chain'
+      5920: 'DeFi Chain',
+      5921: 'Gaming Chain',
+      5922: 'Development Chain'
     }
     return names[chainId] || `Chain ${chainId}`
   }
 
   const isKadenaChain = (chainId) => {
-    return [20, 21, 22].includes(chainId)
+    return [5920, 5921, 5922].includes(chainId)
   }
 
   useEffect(() => {

@@ -39,57 +39,146 @@ A privacy-preserving, multi-chain reputation system built on Kadena's Chainweb E
                     └─────────────────┘
 ```
 
-## 🚀 Quick Start
+## 🚀 Complete Deployment Guide
 
 ### Prerequisites
 
-- Node.js 18+
-- MetaMask or compatible wallet
-- Git
+- **Node.js 18+** (Download from [nodejs.org](https://nodejs.org))
+- **MetaMask Browser Extension** (Install from [metamask.io](https://metamask.io))
+- **Git** (Download from [git-scm.com](https://git-scm.com))
 
-### Installation
+### Step-by-Step Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/chainweb-zkrep.git
-   cd chainweb-zkrep
-   ```
+#### 1. **Get the Code**
+```bash
+# If you have the code already, navigate to the directory
+cd kadena_croissant
 
-2. **Install dependencies**
-   ```bash
-   # Install smart contract dependencies
-   npm install
+# OR clone from repository
+git clone https://github.com/your-username/chainweb-zkrep.git
+cd chainweb-zkrep
+```
 
-   # Install frontend dependencies
-   cd frontend
-   npm install
-   cd ..
-   ```
+#### 2. **Install All Dependencies**
+```bash
+# Install smart contract dependencies
+npm install
 
-3. **Setup environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your private key and configuration
-   ```
+# Install frontend dependencies
+cd frontend
+npm install
+cd ..
+```
 
-4. **Compile smart contracts**
-   ```bash
-   npx hardhat compile
-   ```
+#### 3. **Setup Environment Variables**
+```bash
+# The .env file should already exist, if not:
+# Windows: copy .env.example .env
+# Linux/Mac: cp .env.example .env
 
-5. **Deploy to Kadena testnet**
-   ```bash
-   # Deploy to Chain 20 (DeFi)
-   npx hardhat run scripts/deploy.js --network kadena-chain20
-   ```
+# Edit .env file and replace "your_private_key_here" with your actual private key
+```
 
-6. **Start the frontend**
-   ```bash
-   cd frontend
-   npm run dev
-   ```
+**⚠️ IMPORTANT: Get Your Private Key**
+1. Open MetaMask
+2. Click the 3 dots menu → Account Details → Export Private Key
+3. Enter your password and copy the private key
+4. Paste it in `.env` file (without the 0x prefix)
 
-Visit `http://localhost:3000` to see the application!
+#### 4. **Compile Smart Contracts**
+```bash
+npx hardhat compile
+```
+✅ Should show: "Compiled 4 Solidity files successfully"
+
+#### 5. **Get Test KDA Tokens**
+1. Go to [Kadena EVM Testnet Faucet](https://faucet.evm-testnet.kadena.io)
+2. Connect your MetaMask wallet
+3. Request test tokens for all chains (20, 21, 22)
+
+#### 6. **Deploy Smart Contracts**
+```bash
+# Deploy to Chain 20 (DeFi)
+npx hardhat run scripts/deploy.js --network kadena-chain20
+
+# Save the contract address from the output!
+```
+
+#### 7. **Start the Frontend**
+```bash
+cd frontend
+npm run dev
+```
+
+#### 8. **Setup MetaMask Networks**
+Add these networks to MetaMask manually:
+
+**Chain 20 (DeFi)**
+- Network Name: `Kadena EVM Chain 20 (DeFi)`
+- RPC URL: `https://rpc.evm-testnet.kadena.io/rpc/chain/20`
+- Chain ID: `20`
+- Currency Symbol: `KDA`
+
+**Chain 21 (Gaming)**
+- Network Name: `Kadena EVM Chain 21 (Gaming)`
+- RPC URL: `https://rpc.evm-testnet.kadena.io/rpc/chain/21`
+- Chain ID: `21`
+- Currency Symbol: `KDA`
+
+**Chain 22 (Development)**
+- Network Name: `Kadena EVM Chain 22 (Development)`
+- RPC URL: `https://rpc.evm-testnet.kadena.io/rpc/chain/22`
+- Chain ID: `22`
+- Currency Symbol: `KDA`
+
+#### 9. **Test the Application**
+1. Visit `http://localhost:3000`
+2. Connect your MetaMask wallet
+3. Switch between chains using the chain selector
+4. Execute test transactions to see reputation updates
+5. Watch your scores update in real-time!
+
+### Quick Commands Reference
+
+```bash
+# Compile contracts
+npx hardhat compile
+
+# Deploy to specific chain
+npx hardhat run scripts/deploy.js --network kadena-chain20
+
+# Start development server
+cd frontend && npm run dev
+
+# Index user data (after deployment)
+node scripts/dataIndexer.js <CONTRACT_ADDRESS> batch <YOUR_ADDRESS>
+
+# Query reputation
+node scripts/dataIndexer.js <CONTRACT_ADDRESS> query <YOUR_ADDRESS>
+```
+
+### Troubleshooting
+
+**❌ "Private key too short" error**
+- Make sure your private key in `.env` is exactly 64 characters (without 0x)
+
+**❌ "Insufficient funds" error**
+- Get test tokens from the faucet for the specific chain you're deploying to
+
+**❌ "Network not found" error**
+- Add the Kadena EVM networks to MetaMask manually using the settings above
+
+**❌ Frontend won't start**
+- Make sure you're in the `frontend` directory: `cd frontend`
+- Try deleting `node_modules` and running `npm install` again
+
+### Success Indicators
+
+✅ **Smart contracts compile** - You see "Compiled successfully"
+✅ **Deployment works** - You get a contract address
+✅ **Frontend loads** - http://localhost:3000 shows the beautiful UI
+✅ **Wallet connects** - MetaMask connects to the app
+✅ **Transactions work** - You can execute test transactions and see reputation updates
 
 ## 🔧 Configuration
 

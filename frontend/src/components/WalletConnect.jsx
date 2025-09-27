@@ -24,7 +24,7 @@ const WalletConnect = () => {
       <div className="flex items-center space-x-3">
         {/* Chain Switcher */}
         <div className="flex space-x-1">
-          {[20, 21, 22].map((chain) => (
+          {[5920, 5921, 5922].map((chain) => (
             <motion.button
               key={chain}
               onClick={() => switchChain(chain)}
@@ -36,7 +36,7 @@ const WalletConnect = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {chain}
+              {chain === 5920 ? '20' : chain === 5921 ? '21' : '22'}
             </motion.button>
           ))}
         </div>

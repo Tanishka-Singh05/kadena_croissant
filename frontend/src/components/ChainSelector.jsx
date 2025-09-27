@@ -7,7 +7,7 @@ const ChainSelector = ({ selectedChain, onChainSelect, currentChain }) => {
 
   const chains = [
     {
-      id: 20,
+      id: 5920,
       name: 'DeFi Chain',
       description: 'Trading, Liquidity, Lending',
       color: 'from-primary-500 to-primary-600',
@@ -18,7 +18,7 @@ const ChainSelector = ({ selectedChain, onChainSelect, currentChain }) => {
       )
     },
     {
-      id: 21,
+      id: 5921,
       name: 'Gaming Chain',
       description: 'NFTs, Achievements, Gaming',
       color: 'from-accent-brown to-accent-dark',
@@ -29,7 +29,7 @@ const ChainSelector = ({ selectedChain, onChainSelect, currentChain }) => {
       )
     },
     {
-      id: 22,
+      id: 5922,
       name: 'Dev Chain',
       description: 'Contracts, Development, Code',
       color: 'from-primary-600 to-primary-700',

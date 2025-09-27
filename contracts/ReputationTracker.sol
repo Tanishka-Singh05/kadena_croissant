@@ -77,7 +77,7 @@ contract ReputationTracker is Ownable, ReentrancyGuard {
         Domain domain,
         string calldata activityType,
         uint256 value
-    ) external onlyAuthorized {
+    ) public onlyAuthorized {
         ActivityMetrics storage metrics = userMetrics[user][domain];
 
         if (keccak256(bytes(activityType)) == keccak256("transaction")) {
