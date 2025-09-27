@@ -341,5 +341,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 📧 [Email Support](mailto:support@yourproject.com)
 
 ---
-
-Built with ❤️ for ETHGlobal New Delhi 2025
