@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import WalletConnect from './WalletConnect'
+import NavPill from './NavPill'
+import ExclusivityModal from './ExclusivityModal'
 import { useWallet } from '../contexts/WalletContext'
 
 const Header = () => {
   const { account, chainId, getChainName, isKadenaChain } = useWallet()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <motion.header
@@ -53,11 +56,22 @@ const Header = () => {
               </motion.div>
             )}
 
+            {/* Exclusivity Status Pill */}
+            {account && isKadenaChain(chainId) && (
+              <NavPill onOpenModal={() => setIsModalOpen(true)} />
+            )}
+
             {/* Wallet Connect */}
             <WalletConnect />
           </div>
         </div>
       </div>
+      
+      {/* Exclusivity Modal */}
+      <ExclusivityModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </motion.header>
   )
 }
