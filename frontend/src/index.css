@@ -46,4 +46,51 @@
   .chain-badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-700 border border-primary-200;
   }
+
+  .exclusivity-pill {
+    @apply relative flex items-center space-x-2 px-4 py-3 rounded-full font-medium text-sm transition-all duration-250 ease-out;
+  }
+
+  .exclusivity-pill-eligible {
+    @apply bg-gradient-to-r from-primary-500 to-accent-brown text-white shadow-lg;
+  }
+
+  .exclusivity-pill-locked {
+    @apply bg-gradient-to-r from-primary-200 to-primary-300 text-primary-700 border border-primary-300;
+  }
+
+  .modal-backdrop {
+    @apply fixed inset-0 bg-black/20 backdrop-blur-sm z-[9998];
+  }
+
+  .modal-content {
+    @apply relative w-full max-w-6xl bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-white/30 overflow-hidden;
+  }
+
+  .modal-container {
+    @apply fixed inset-0 z-[9999] flex items-center justify-center p-4 overflow-y-auto;
+  }
+
+  /* Ensure modal portal is completely isolated */
+  .modal-portal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: auto;
+    z-index: 9999;
+  }
+
+  .domain-tile {
+    @apply relative p-6 rounded-xl border-2 transition-all duration-250 ease-out hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .progress-ring {
+    @apply w-20 h-20 mx-auto;
+  }
+
+  .invite-card {
+    @apply mt-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg;
+  }
 }

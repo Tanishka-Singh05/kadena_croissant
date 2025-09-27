@@ -97,7 +97,7 @@ const Dashboard = () => {
       />
 
       {/* Reputation Overview */}
-      <div className="grid lg:grid-cols-4 gap-6">
+      <div id="reputation-overview" className="grid lg:grid-cols-4 gap-6">
         <ReputationCard
           title="DeFi Reputation"
           score={reputationScores.defiScore}
