@@ -4,6 +4,12 @@ A privacy-preserving, multi-chain reputation system built on Kadena's Chainweb E
 
 ![Chainweb ZK Reputation](https://img.shields.io/badge/Kadena-EVM-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Build](https://img.shields.io/badge/build-passing-brightgreen)
 
+## 🎉 **SUCCESSFULLY DEPLOYED!**
+
+✅ **Contract Deployed**: `0xd690A2abB2Da7957e36CE70d844eCBE8cec06f50` on Chain 5920
+✅ **Frontend Running**: http://localhost:3001
+✅ **All Systems Operational**: Ready for testing and demo!
+
 ## 🌟 Features
 
 - **Multi-Chain Reputation**: Track reputation across Kadena EVM chains 20-22
@@ -115,20 +121,20 @@ Add these networks to MetaMask manually:
 
 **Chain 20 (DeFi)**
 - Network Name: `Kadena EVM Chain 20 (DeFi)`
-- RPC URL: `https://rpc.evm-testnet.kadena.io/rpc/chain/20`
-- Chain ID: `20`
+- RPC URL: `https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/20/evm/rpc`
+- Chain ID: `5920`
 - Currency Symbol: `KDA`
 
 **Chain 21 (Gaming)**
 - Network Name: `Kadena EVM Chain 21 (Gaming)`
-- RPC URL: `https://rpc.evm-testnet.kadena.io/rpc/chain/21`
-- Chain ID: `21`
+- RPC URL: `https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/21/evm/rpc`
+- Chain ID: `5921`
 - Currency Symbol: `KDA`
 
 **Chain 22 (Development)**
 - Network Name: `Kadena EVM Chain 22 (Development)`
-- RPC URL: `https://rpc.evm-testnet.kadena.io/rpc/chain/22`
-- Chain ID: `22`
+- RPC URL: `https://evm-testnet.chainweb.com/chainweb/0.0/evm-testnet/chain/22/evm/rpc`
+- Chain ID: `5922`
 - Currency Symbol: `KDA`
 
 #### 9. **Test the Application**

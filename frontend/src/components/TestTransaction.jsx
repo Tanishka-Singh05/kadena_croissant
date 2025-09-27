@@ -12,26 +12,26 @@ const TestTransaction = ({ selectedChain }) => {
 
   const getChainDescription = (chain) => {
     const descriptions = {
-      20: {
+      5920: {
         name: 'DeFi Chain',
         activity: 'Execute a swap transaction',
         description: 'This will simulate a DeFi transaction and update your reputation score',
         color: 'primary'
       },
-      21: {
+      5921: {
         name: 'Gaming Chain',
         activity: 'Claim achievement NFT',
         description: 'This will simulate a gaming achievement and update your reputation score',
         color: 'accent'
       },
-      22: {
+      5922: {
         name: 'Development Chain',
         activity: 'Deploy test contract',
         description: 'This will simulate a contract deployment and update your reputation score',
         color: 'secondary'
       }
     }
-    return descriptions[chain] || descriptions[20]
+    return descriptions[chain] || descriptions[5920]
   }
 
   const executeTestTransaction = async () => {
@@ -52,12 +52,38 @@ const TestTransaction = ({ selectedChain }) => {
     try {
       const signer = await provider.getSigner()
 
-      // Create a simple test transaction (sending a small amount to self)
-      const tx = await signer.sendTransaction({
-        to: account,
-        value: ethers.parseEther('0.001'), // Small amount for testing
-        data: ethers.hexlify(ethers.toUtf8Bytes(`Test transaction on chain ${selectedChain}`))
-      })
+      // Create different transaction types based on the chain/domain
+      let tx
+
+      if (selectedChain === 5920) {
+        // DeFi Chain: Simple transfer to a different address (simulating a trade)
+        const testAddress = "0x0000000000000000000000000000000000000001" // Burn address
+        tx = await signer.sendTransaction({
+          to: testAddress,
+          value: ethers.parseEther('0.001'), // Small amount for testing
+        })
+      } else if (selectedChain === 5921) {
+        // Gaming Chain: Simple transfer (simulating NFT/gaming transaction)
+        const testAddress = "0x0000000000000000000000000000000000000002" // Different burn address
+        tx = await signer.sendTransaction({
+          to: testAddress,
+          value: ethers.parseEther('0.0005'), // Smaller amount
+        })
+      } else if (selectedChain === 5922) {
+        // Dev Chain: Simple transfer (simulating contract interaction)
+        const testAddress = "0x0000000000000000000000000000000000000003" // Another burn address
+        tx = await signer.sendTransaction({
+          to: testAddress,
+          value: ethers.parseEther('0.0001'), // Very small amount
+        })
+      } else {
+        // Fallback for any other chain
+        const testAddress = "0x0000000000000000000000000000000000000001"
+        tx = await signer.sendTransaction({
+          to: testAddress,
+          value: ethers.parseEther('0.001'),
+        })
+      }
 
       setTxHash(tx.hash)
 
@@ -89,8 +115,8 @@ const TestTransaction = ({ selectedChain }) => {
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl font-semibold text-primary-700">Test Transaction</h3>
         <span className={`chain-badge ${
-          selectedChain === 20 ? 'bg-primary-100 text-primary-700' :
-          selectedChain === 21 ? 'bg-orange-100 text-orange-700' :
+          selectedChain === 5920 ? 'bg-primary-100 text-primary-700' :
+          selectedChain === 5921 ? 'bg-orange-100 text-orange-700' :
           'bg-purple-100 text-purple-700'
         }`}>
           {chainDesc.name}
