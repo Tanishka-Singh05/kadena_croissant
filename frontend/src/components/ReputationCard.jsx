@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-const ReputationCard = ({ title, score, chain, color, isLoading, isTotal = false }) => {
+const ReputationCard = ({ title, score, chain, color, isLoading, isTotal = false, userLevel, levelProgress }) => {
   const getColorClasses = (color) => {
     const colors = {
       primary: 'from-primary-500 to-primary-600',
@@ -77,6 +77,14 @@ const ReputationCard = ({ title, score, chain, color, isLoading, isTotal = false
             <div className="text-xs text-primary-500">
               {chain === 'all' ? 'Weighted Average' : `Chain ${chain} Activity`}
             </div>
+            {isTotal && userLevel && (
+              <div className="flex items-center space-x-2 mt-2">
+                <span className="text-lg">{userLevel.icon}</span>
+                <span className={`text-sm font-semibold text-${userLevel.color}-600`}>
+                  {userLevel.level}
+                </span>
+              </div>
+            )}
           </>
         )}
       </div>
@@ -87,13 +95,26 @@ const ReputationCard = ({ title, score, chain, color, isLoading, isTotal = false
           <motion.div
             className={`h-full bg-gradient-to-r ${getColorClasses(color)}`}
             initial={{ width: 0 }}
-            animate={{ width: `${Math.min((score / (isTotal ? 3000 : 1500)) * 100, 100)}%` }}
+            animate={{
+              width: isTotal && levelProgress
+                ? `${levelProgress.progress}%`
+                : `${Math.min((score / (isTotal ? 3000 : 1500)) * 100, 100)}%`
+            }}
             transition={{ duration: 1, delay: 0.5 }}
           />
         </div>
         <div className="flex justify-between text-xs text-primary-500 mt-1">
-          <span>0</span>
-          <span>{isTotal ? '3000' : '1500'}+</span>
+          {isTotal && levelProgress ? (
+            <>
+              <span>Current Level</span>
+              <span>{levelProgress.pointsToNext > 0 ? `${levelProgress.pointsToNext} to ${levelProgress.nextLevel}` : 'Max Level'}</span>
+            </>
+          ) : (
+            <>
+              <span>0</span>
+              <span>{isTotal ? '3000' : '1500'}+</span>
+            </>
+          )}
         </div>
       </div>
 

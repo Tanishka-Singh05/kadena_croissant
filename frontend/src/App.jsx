@@ -98,6 +98,7 @@ function App() {
           </motion.div>
         </main>
       </div>
+        </ReputationProvider>
       </ActivityProvider>
     </WalletProvider>
   )

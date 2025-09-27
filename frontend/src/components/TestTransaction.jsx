@@ -103,7 +103,7 @@ const TestTransaction = ({ selectedChain }) => {
       // Record the activity
       addActivity({
         type: activityType,
-        description: chainDesc.activity,
+        description: getChainDescription(selectedChain).activity,
         points: points,
         txHash: tx.hash,
         chainId: selectedChain,

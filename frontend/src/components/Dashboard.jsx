@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useWallet } from '../contexts/WalletContext'
+import { useReputation } from '../contexts/ReputationContext'
 import ReputationCard from './ReputationCard'
 import ActivityFeed from './ActivityFeed'
 import ChainSelector from './ChainSelector'
@@ -8,46 +9,18 @@ import TestTransaction from './TestTransaction'
 
 const Dashboard = () => {
   const { account, chainId, isKadenaChain } = useWallet()
+  const { reputationScores, getUserLevel, getLevelProgress } = useReputation()
   const [selectedChain, setSelectedChain] = useState(5920)
-  const [reputationData, setReputationData] = useState({
-    defiScore: 0,
-    gamingScore: 0,
-    devScore: 0,
-    totalScore: 0,
-    lastUpdated: null,
-    isActive: false
-  })
-
   const [isLoading, setIsLoading] = useState(false)
 
-  // Mock data for demonstration
+  // Set loading state when account changes
   useEffect(() => {
     if (account) {
-      // Simulate loading reputation data
       setIsLoading(true)
-      setTimeout(() => {
-        setReputationData({
-          defiScore: Math.floor(Math.random() * 1000) + 500,
-          gamingScore: Math.floor(Math.random() * 800) + 300,
-          devScore: Math.floor(Math.random() * 1200) + 700,
-          totalScore: 0, // Will be calculated
-          lastUpdated: new Date(),
-          isActive: true
-        })
-        setIsLoading(false)
-      }, 1500)
+      // Brief loading state for UX
+      setTimeout(() => setIsLoading(false), 800)
     }
   }, [account])
-
-  // Calculate total score when individual scores change
-  useEffect(() => {
-    const total = Math.floor(
-      (reputationData.defiScore * 0.4) +
-      (reputationData.gamingScore * 0.3) +
-      (reputationData.devScore * 0.3)
-    )
-    setReputationData(prev => ({ ...prev, totalScore: total }))
-  }, [reputationData.defiScore, reputationData.gamingScore, reputationData.devScore])
 
   if (!account) {
     return (
@@ -127,32 +100,34 @@ const Dashboard = () => {
       <div className="grid lg:grid-cols-4 gap-6">
         <ReputationCard
           title="DeFi Reputation"
-          score={reputationData.defiScore}
-          chain={20}
+          score={reputationScores.defiScore}
+          chain={5920}
           color="primary"
           isLoading={isLoading}
         />
         <ReputationCard
           title="Gaming Reputation"
-          score={reputationData.gamingScore}
-          chain={21}
+          score={reputationScores.gamingScore}
+          chain={5921}
           color="accent"
           isLoading={isLoading}
         />
         <ReputationCard
           title="Dev Reputation"
-          score={reputationData.devScore}
-          chain={22}
+          score={reputationScores.devScore}
+          chain={5922}
           color="secondary"
           isLoading={isLoading}
         />
         <ReputationCard
           title="Total Score"
-          score={reputationData.totalScore}
+          score={reputationScores.totalScore}
           chain="all"
           color="gradient"
           isLoading={isLoading}
           isTotal={true}
+          userLevel={getUserLevel()}
+          levelProgress={getLevelProgress()}
         />
       </div>
 
