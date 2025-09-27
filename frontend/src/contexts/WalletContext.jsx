@@ -12,9 +12,12 @@ export const useWallet = () => {
 }
 
 export const WalletProvider = ({ children }) => {
-  const [account, setAccount] = useState(null)
+  const [account, setAccount] = useState(() => localStorage.getItem('chainweb-account') || null)
   const [provider, setProvider] = useState(null)
-  const [chainId, setChainId] = useState(null)
+  const [chainId, setChainId] = useState(() => {
+    const stored = localStorage.getItem('chainweb-chainId')
+    return stored ? Number(stored) : null
+  })
   const [isConnecting, setIsConnecting] = useState(false)
   const [error, setError] = useState(null)
 
@@ -71,9 +74,11 @@ export const WalletProvider = ({ children }) => {
       const provider = new ethers.BrowserProvider(window.ethereum)
       const network = await provider.getNetwork()
 
-      setAccount(accounts[0])
-      setProvider(provider)
-      setChainId(Number(network.chainId))
+  setAccount(accounts[0])
+  localStorage.setItem('chainweb-account', accounts[0])
+  setProvider(provider)
+  setChainId(Number(network.chainId))
+  localStorage.setItem('chainweb-chainId', Number(network.chainId))
 
       // If not on a Kadena chain, prompt to switch to chain 5920
       if (![5920, 5921, 5922].includes(Number(network.chainId))) {
@@ -81,7 +86,12 @@ export const WalletProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Failed to connect wallet:', error)
-      setError(error.message)
+      // Log full error object for debugging
+      if (typeof error === 'object') {
+        setError(JSON.stringify(error, Object.getOwnPropertyNames(error)))
+      } else {
+        setError(String(error))
+      }
     } finally {
       setIsConnecting(false)
     }
@@ -106,8 +116,9 @@ export const WalletProvider = ({ children }) => {
       if (window.ethereum) {
         const provider = new ethers.BrowserProvider(window.ethereum)
         const network = await provider.getNetwork()
-        setProvider(provider)
-        setChainId(Number(network.chainId))
+  setProvider(provider)
+  setChainId(Number(network.chainId))
+  localStorage.setItem('chainweb-chainId', Number(network.chainId))
       }
     } catch (switchError) {
       // Log full error for debugging
@@ -125,6 +136,7 @@ export const WalletProvider = ({ children }) => {
             const network = await provider.getNetwork()
             setProvider(provider)
             setChainId(Number(network.chainId))
+            localStorage.setItem('chainweb-chainId', Number(network.chainId))
           }
         } catch (addError) {
           console.error('Add chain error:', addError)
@@ -137,10 +149,12 @@ export const WalletProvider = ({ children }) => {
   }
 
   const disconnectWallet = () => {
-    setAccount(null)
-    setProvider(null)
-    setChainId(null)
-    setError(null)
+  setAccount(null)
+  setProvider(null)
+  setChainId(null)
+  setError(null)
+  localStorage.removeItem('chainweb-account')
+  localStorage.removeItem('chainweb-chainId')
   }
 
   const getChainName = (chainId) => {
@@ -157,17 +171,26 @@ export const WalletProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    // Restore provider if account exists in localStorage and MetaMask is connected
+    if (window.ethereum && account) {
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      setProvider(provider)
+    }
+
     if (window.ethereum) {
       const handleAccountsChanged = (accounts) => {
         if (accounts.length === 0) {
           disconnectWallet()
         } else {
           setAccount(accounts[0])
+          localStorage.setItem('chainweb-account', accounts[0])
         }
       }
 
       const handleChainChanged = (chainId) => {
-        setChainId(parseInt(chainId, 16))
+        const parsed = parseInt(chainId, 16)
+        setChainId(parsed)
+        localStorage.setItem('chainweb-chainId', parsed)
       }
 
       window.ethereum.on('accountsChanged', handleAccountsChanged)
@@ -178,7 +201,7 @@ export const WalletProvider = ({ children }) => {
         window.ethereum.removeListener('chainChanged', handleChainChanged)
       }
     }
-  }, [])
+  }, [account])
 
   const value = {
     account,

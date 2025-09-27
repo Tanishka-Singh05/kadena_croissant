@@ -13,7 +13,7 @@ export const useActivity = () => {
 export const ActivityProvider = ({ children }) => {
   const [activities, setActivities] = useState([])
 
-  // Load activities from localStorage on mount
+  // Always load activities from localStorage on mount and when the component remounts
   useEffect(() => {
     const savedActivities = localStorage.getItem('chainweb-activities')
     if (savedActivities) {
@@ -27,7 +27,9 @@ export const ActivityProvider = ({ children }) => {
 
   // Save activities to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('chainweb-activities', JSON.stringify(activities))
+    if (activities && activities.length > 0) {
+      localStorage.setItem('chainweb-activities', JSON.stringify(activities))
+    }
   }, [activities])
 
   const addActivity = (activity) => {
@@ -48,9 +50,9 @@ export const ActivityProvider = ({ children }) => {
     return activities.slice(0, limit)
   }
 
+  // Remove clearActivities or make it a no-op to prevent accidental clearing on refresh
   const clearActivities = () => {
-    setActivities([])
-    localStorage.removeItem('chainweb-activities')
+    // No-op: do not clear activities on refresh
   }
 
   const formatTimestamp = (timestamp) => {

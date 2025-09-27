@@ -57,31 +57,32 @@ const TestTransaction = ({ selectedChain }) => {
       await new Promise(resolve => setTimeout(resolve, 500))
       const signer = await provider.getSigner()
 
+      // Check balance before sending
+      const balance = await provider.getBalance(account)
+      let requiredValue
+      if (selectedChain === 5920) {
+        requiredValue = ethers.parseEther('0.001')
+      } else if (selectedChain === 5921) {
+        requiredValue = ethers.parseEther('0.0005')
+      } else if (selectedChain === 5922) {
+        requiredValue = ethers.parseEther('0.0001')
+      } else {
+        requiredValue = ethers.parseEther('0.001')
+      }
+      if (balance < requiredValue) {
+        setError('Insufficient balance for test transaction')
+        setIsLoading(false)
+        return
+      }
+
       // Use the user's own address for test transactions
       const testAddress = account
       let tx
 
-      if (selectedChain === 5920) {
-        tx = await signer.sendTransaction({
-          to: testAddress,
-          value: ethers.parseEther('0.001'),
-        })
-      } else if (selectedChain === 5921) {
-        tx = await signer.sendTransaction({
-          to: testAddress,
-          value: ethers.parseEther('0.0005'),
-        })
-      } else if (selectedChain === 5922) {
-        tx = await signer.sendTransaction({
-          to: testAddress,
-          value: ethers.parseEther('0.0001'),
-        })
-      } else {
-        tx = await signer.sendTransaction({
-          to: testAddress,
-          value: ethers.parseEther('0.001'),
-        })
-      }
+      tx = await signer.sendTransaction({
+        to: testAddress,
+        value: requiredValue,
+      })
 
       setTxHash(tx.hash)
 
@@ -113,8 +114,13 @@ const TestTransaction = ({ selectedChain }) => {
       setShowDetails(true)
 
     } catch (err) {
+      // Log full error object for debugging
       console.error('Transaction failed:', err)
-      setError(err.message || 'Transaction failed')
+      if (typeof err === 'object') {
+        setError(JSON.stringify(err, Object.getOwnPropertyNames(err)))
+      } else {
+        setError(String(err))
+      }
     } finally {
       setIsLoading(false)
     }

@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useActivity } from '../contexts/ActivityContext'
 
-const ActivityFeed = ({ chain }) => {
-  const { getActivitiesByChain, getRecentActivities, formatTimestamp, getActivityIcon } = useActivity()
 
-  // Get activities based on chain filter
-  const activities = chain === 'all' || !chain
+const ActivityFeed = ({ chain = 'all' }) => {
+  const { activities, getActivitiesByChain, getRecentActivities, formatTimestamp, getActivityIcon } = useActivity()
+  const [showModal, setShowModal] = useState(false)
+
+  // Show all activities if chain is 'all', else filter
+  const activitiesToShow = chain === 'all' || !chain
     ? getRecentActivities(10)
     : getActivitiesByChain(chain)
 
@@ -34,8 +36,8 @@ const ActivityFeed = ({ chain }) => {
       </div>
 
       <div className="space-y-4 max-h-96 overflow-y-auto">
-        {activities.length > 0 ? (
-          activities.map((activity, index) => (
+        {activitiesToShow.length > 0 ? (
+          activitiesToShow.map((activity, index) => (
             <motion.div
               key={activity.id}
               className="flex items-center space-x-4 p-3 bg-primary-25 rounded-lg hover:bg-primary-50 transition-colors cursor-pointer"
@@ -113,7 +115,7 @@ const ActivityFeed = ({ chain }) => {
       </div>
 
       {/* View More Button */}
-      {activities.length > 0 && (
+      {activities.length > 10 && (
         <motion.button
           className="btn-secondary w-full mt-4 text-sm"
           initial={{ opacity: 0 }}
@@ -121,9 +123,83 @@ const ActivityFeed = ({ chain }) => {
           transition={{ delay: 0.5 }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
+          onClick={() => setShowModal(true)}
         >
-          View Full History
+          Show All Transactions
         </motion.button>
+      )}
+
+      {/* Modal for all transactions */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6 relative">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
+              onClick={() => setShowModal(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h2 className="text-xl font-bold mb-4 text-primary-700">All Transactions</h2>
+            <div className="space-y-3">
+              {activities.length > 0 ? (
+                activities.map((activity, index) => (
+                  <div
+                    key={activity.id}
+                    className="flex items-center space-x-4 p-3 bg-primary-25 rounded-lg hover:bg-primary-50 transition-colors cursor-pointer"
+                    onClick={() => {
+                      if (activity.txHash) {
+                        const explorerUrls = {
+                          5920: 'https://chain-20.evm-testnet-blockscout.chainweb.com',
+                          5921: 'https://chain-21.evm-testnet-blockscout.chainweb.com',
+                          5922: 'https://chain-22.evm-testnet-blockscout.chainweb.com'
+                        }
+                        const explorerUrl = explorerUrls[activity.chainId]
+                        if (explorerUrl) {
+                          window.open(`${explorerUrl}/tx/${activity.txHash}`, '_blank')
+                        }
+                      }
+                    }}
+                  >
+                    <div className={`w-8 h-8 rounded-full ${getChainColor(activity.chainId)} flex items-center justify-center text-white`}>
+                      {getActivityIcon(activity.type)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-primary-700 truncate">
+                        {activity.description}
+                      </p>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <span className="text-xs text-primary-500">{formatTimestamp(activity.timestamp)}</span>
+                        <span className="text-xs chain-badge">
+                          {activity.chainName}
+                        </span>
+                        {activity.txHash && (
+                          <span className="text-xs text-blue-600 hover:text-blue-800">
+                            {activity.txHash.slice(0, 8)}...
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm font-semibold text-green-600">
+                        +{activity.points} pts
+                      </div>
+                      {activity.value && (
+                        <div className="text-xs text-primary-500">
+                          {parseFloat(activity.value).toFixed(4)} KDA
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-primary-600 text-sm">No activity found</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
     </motion.div>
   )

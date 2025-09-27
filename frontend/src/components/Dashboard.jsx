@@ -136,7 +136,7 @@ const Dashboard = () => {
 
       {/* Activity Feed */}
       <div className="grid lg:grid-cols-2 gap-8">
-        <ActivityFeed chain={selectedChain} />
+        <ActivityFeed chain={selectedChain === 'all' ? 'all' : null} />
 
         {/* ZK Proof Status */}
         <motion.div
