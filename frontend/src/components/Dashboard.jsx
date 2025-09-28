@@ -6,6 +6,7 @@ import ReputationCard from './ReputationCard'
 import ActivityFeed from './ActivityFeed'
 import ChainSelector from './ChainSelector'
 import TestTransaction from './TestTransaction'
+import VerificationStatus from './VerificationStatus'
 
 const Dashboard = () => {
   const { account, chainId, isKadenaChain } = useWallet()
@@ -134,7 +135,17 @@ const Dashboard = () => {
       {/* Test Transaction Component */}
       <TestTransaction selectedChain={selectedChain} />
 
-      {/* Activity Feed */}
+      {/* Identity Verification */}
+      <VerificationStatus
+        contractAddress="0xd690A2abB2Da7957e36CE70d844eCBE8cec06f50"
+        onVerificationComplete={(result) => {
+          console.log('Verification completed:', result);
+          // Force a reputation refresh to reflect the bonus
+          window.location.reload();
+        }}
+      />
+
+      {/* Activity Feed and ZK Proof Status */}
       <div className="grid lg:grid-cols-2 gap-8">
         <ActivityFeed chain={selectedChain} />
 

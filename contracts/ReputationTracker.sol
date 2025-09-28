@@ -4,6 +4,10 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
+interface ISelfVerifier {
+    function verifyProof(bytes32 selfProof) external pure returns (bool);
+}
+
 contract ReputationTracker is Ownable, ReentrancyGuard {
 
     enum Domain {
@@ -34,6 +38,12 @@ contract ReputationTracker is Ownable, ReentrancyGuard {
     mapping(address => mapping(Domain => ActivityMetrics)) public userMetrics;
     mapping(address => bool) public authorizedRelayers;
 
+    // Self Protocol integration mappings
+    mapping(address => bool) public verifiedHumans;
+    mapping(address => uint256) public verificationLevel; // 1=basic, 2=kyc, 3=aadhaar
+
+    ISelfVerifier public selfVerifier;
+
     uint256 public constant DEFI_WEIGHT = 40;
     uint256 public constant GAMING_WEIGHT = 30;
     uint256 public constant DEV_WEIGHT = 30;
@@ -52,6 +62,12 @@ contract ReputationTracker is Ownable, ReentrancyGuard {
         uint256 value
     );
 
+    event HumanVerified(
+        address indexed user,
+        uint256 verificationLevel,
+        uint256 timestamp
+    );
+
     modifier onlyAuthorized() {
         require(
             authorizedRelayers[msg.sender] || msg.sender == owner(),
@@ -62,6 +78,10 @@ contract ReputationTracker is Ownable, ReentrancyGuard {
 
     constructor() Ownable(msg.sender) {
         authorizedRelayers[msg.sender] = true;
+    }
+
+    function setSelfVerifier(address _selfVerifier) external onlyOwner {
+        selfVerifier = ISelfVerifier(_selfVerifier);
     }
 
     function addAuthorizedRelayer(address relayer) external onlyOwner {
@@ -99,6 +119,29 @@ contract ReputationTracker is Ownable, ReentrancyGuard {
         emit ActivityRecorded(user, domain, activityType, value);
     }
 
+    function updateReputationWithVerification(
+        address user,
+        Domain domain,
+        uint256 score,
+        bytes32 selfProof
+    ) external onlyAuthorized {
+        require(address(selfVerifier) != address(0), "SelfVerifier not set");
+        require(selfVerifier.verifyProof(selfProof), "Invalid identity proof");
+
+        // Mark user as verified human if not already
+        if (!verifiedHumans[user]) {
+            verifiedHumans[user] = true;
+            verificationLevel[user] = 1; // Basic verification level
+            emit HumanVerified(user, 1, block.timestamp);
+        }
+
+        // Apply 50% bonus for verified humans (1.5x multiplier)
+        uint256 multiplier = verifiedHumans[user] ? 150 : 100;
+        uint256 adjustedScore = (score * multiplier) / 100;
+
+        _updateReputationDirect(user, domain, adjustedScore);
+    }
+
     function _updateReputation(address user, Domain domain) internal {
         ActivityMetrics memory metrics = userMetrics[user][domain];
         uint256 domainScore = 0;
@@ -126,6 +169,24 @@ contract ReputationTracker is Ownable, ReentrancyGuard {
         reputation.isActive = true;
 
         emit ReputationUpdated(user, domain, domainScore, reputation.totalScore);
+    }
+
+    function _updateReputationDirect(address user, Domain domain, uint256 score) internal {
+        UserReputation storage reputation = userReputations[user];
+
+        if (domain == Domain.DEFI) {
+            reputation.defiScore = score;
+        } else if (domain == Domain.GAMING) {
+            reputation.gamingScore = score;
+        } else if (domain == Domain.DEV) {
+            reputation.devScore = score;
+        }
+
+        reputation.totalScore = _calculateTotalScore(reputation);
+        reputation.lastUpdated = block.timestamp;
+        reputation.isActive = true;
+
+        emit ReputationUpdated(user, domain, score, reputation.totalScore);
     }
 
     function _calculateDefiScore(ActivityMetrics memory metrics) internal pure returns (uint256) {
@@ -199,6 +260,10 @@ contract ReputationTracker is Ownable, ReentrancyGuard {
 
     function getUserMetrics(address user, Domain domain) external view returns (ActivityMetrics memory) {
         return userMetrics[user][domain];
+    }
+
+    function getVerificationStatus(address user) external view returns (bool isVerified, uint256 level) {
+        return (verifiedHumans[user], verificationLevel[user]);
     }
 
     function batchRecordActivities(
