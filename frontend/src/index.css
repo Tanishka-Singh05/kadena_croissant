@@ -39,6 +39,15 @@
     @apply bg-gradient-to-r from-primary-600 to-accent-brown bg-clip-text text-transparent;
   }
 
+  /* Hide scrollbar for all browsers */
+  .hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
   .reputation-score {
     @apply text-2xl font-bold text-gradient;
   }
