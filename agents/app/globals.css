@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white/80 backdrop-blur-sm border border-primary-200/50 rounded-xl p-6 shadow-soft hover:shadow-glow transition-all duration-300;
+  }
+  
+  .card-glass {
+    @apply bg-white/60 backdrop-blur-md border border-primary-200/30 rounded-xl p-6 shadow-soft;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply bg-primary-100 hover:bg-primary-200 text-primary-700 font-medium px-6 py-3 rounded-lg transition-all duration-200;
+  }
+  
+  .agent-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 via-accent-brown to-primary-700 bg-clip-text text-transparent;
+  }
+  
+  .message-user {
+    @apply bg-primary-500 text-white ml-auto;
+  }
+  
+  .message-agent {
+    @apply bg-white border border-primary-200 text-primary-800 mr-auto;
+  }
+  
+  .typing-indicator {
+    @apply flex space-x-1;
+  }
+  
+  .typing-dot {
+    @apply w-2 h-2 bg-primary-400 rounded-full animate-pulse;
+  }
+}
