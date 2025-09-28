@@ -15,7 +15,7 @@ const AIAgents = () => {
       description: 'Inspects your Kadena Chainweb transactions, gas usage, and risk signals in real time',
       icon: LineChart,
       color: 'primary',
-      gradient: 'from-blue-500 to-blue-600'
+      gradient: 'from-primary-500 to-primary-600'
     },
     {
       id: 'goal-tracking',
@@ -23,7 +23,7 @@ const AIAgents = () => {
       description: 'Tracks your reputation milestones and delivers step-by-step guidance to hit your targets',
       icon: Target,
       color: 'accent',
-      gradient: 'from-amber-500 to-orange-600'
+      gradient: 'from-accent-brown to-accent-orange'
     },
     {
       id: 'reputation-enhancement',
@@ -31,7 +31,7 @@ const AIAgents = () => {
       description: 'Designs personalized action plans to elevate your cross-domain reputation scores',
       icon: Brain,
       color: 'secondary',
-      gradient: 'from-purple-500 to-purple-600'
+      gradient: 'from-primary-600 to-primary-700'
     }
   ]
 
@@ -163,12 +163,12 @@ const AIAgents = () => {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               placeholder="Ask about your reputation, transactions, or goals..."
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
             <button
               onClick={handleSendMessage}
               disabled={!inputMessage.trim() || isLoading}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <MessageCircle className="w-5 h-5" />
             </button>
@@ -202,24 +202,24 @@ const AIAgents = () => {
       {/* Features */}
       <div className="grid md:grid-cols-3 gap-6 pt-6 border-t border-primary-100">
         <div className="text-center">
-          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <LineChart className="w-6 h-6 text-blue-600" />
+          <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <LineChart className="w-6 h-6 text-primary-600" />
           </div>
           <h4 className="font-semibold text-primary-700 mb-2">Smart Analysis</h4>
           <p className="text-sm text-primary-600">AI-powered insights into your reputation patterns</p>
         </div>
 
         <div className="text-center">
-          <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <TrendingUp className="w-6 h-6 text-amber-600" />
+          <div className="w-12 h-12 bg-accent-brown/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <TrendingUp className="w-6 h-6 text-accent-brown" />
           </div>
           <h4 className="font-semibold text-primary-700 mb-2">Strategy Optimization</h4>
           <p className="text-sm text-primary-600">Personalized recommendations for reputation growth</p>
         </div>
 
         <div className="text-center">
-          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <Shield className="w-6 h-6 text-purple-600" />
+          <div className="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center mx-auto mb-3">
+            <Shield className="w-6 h-6 text-primary-700" />
           </div>
           <h4 className="font-semibold text-primary-700 mb-2">Risk Assessment</h4>
           <p className="text-sm text-primary-600">Proactive monitoring of reputation risks</p>
