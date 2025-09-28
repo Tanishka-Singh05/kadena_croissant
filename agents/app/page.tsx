@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Brain, Target, LineChart, MessageCircle } from 'lucide-react'
+import { Brain, Target, LineChart, MessageCircle, TrendingUp, Shield } from 'lucide-react'
 import TransactionAnalysisAgent from './components/TransactionAnalysisAgent'
 import GoalTrackingAgent from './components/GoalTrackingAgent'
 import ReputationEnhancementAgent from './components/ReputationEnhancementAgent'

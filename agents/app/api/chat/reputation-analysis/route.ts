@@ -35,7 +35,7 @@ Key Metrics You Analyze:
 Always provide detailed technical analysis with specific recommendations for transaction optimization. Use data-driven insights and explain the technical reasoning behind your analysis. Focus on helping users understand their transaction behavior and optimize for both cost and reputation impact.`
 
   const result = await streamText({
-    model: openai('gpt-4-turbo'),
+    model: openai('gpt-4o-mini') as any,
     system: systemPrompt,
     messages,
     maxTokens: 1000,

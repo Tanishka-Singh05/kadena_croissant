@@ -40,7 +40,7 @@ Your role is to:
 Always prioritize user privacy and security. Explain complex concepts clearly while maintaining technical accuracy. Use an educational, trustworthy tone.`
 
   const result = await streamText({
-    model: openai('gpt-4-turbo'),
+    model: openai('gpt-4o-mini') as any,
     system: systemPrompt,
     messages,
     maxTokens: 1000,

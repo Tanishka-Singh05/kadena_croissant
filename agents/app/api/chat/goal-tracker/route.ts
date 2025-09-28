@@ -27,7 +27,7 @@ Always respond with:
 Tone: supportive, forward-looking, data-driven.`
 
   const result = await streamText({
-    model: openai('gpt-4-turbo'),
+    model: openai('gpt-4o-mini') as any,
     system: systemPrompt,
     messages,
     maxTokens: 1000,

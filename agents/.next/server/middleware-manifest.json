@@ -1,0 +1,147 @@
+{
+  "version": 3,
+  "middleware": {},
+  "functions": {
+    "/api/chat/zk-proof-advisor/route": {
+      "files": [
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/edge-chunks/763.js",
+        "server/app/api/chat/zk-proof-advisor/route.js"
+      ],
+      "name": "app/api/chat/zk-proof-advisor/route",
+      "page": "/api/chat/zk-proof-advisor/route",
+      "matchers": [
+        {
+          "regexp": "^/api/chat/zk\\-proof\\-advisor$",
+          "originalSource": "/api/chat/zk-proof-advisor"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "qiw4JeNX-8vtau8jn6Lvv",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "89i4TVlP8PjBdHVX2baaNu2umzu9zf2N6PkAgaYX6zA=",
+        "__NEXT_PREVIEW_MODE_ID": "5a8766ab5110e8216e759f2a1bbef148",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "09d83599a500909911e5458a61f17f5e3e8bac9323eab6ac1cd44ad9c2575861",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "ba36f05040b7ef530e6d527cf5faa84bbefa72a8420adafa3f7856d1262e75ae"
+      }
+    },
+    "/api/chat/goal-tracker/route": {
+      "files": [
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/edge-chunks/763.js",
+        "server/app/api/chat/goal-tracker/route.js"
+      ],
+      "name": "app/api/chat/goal-tracker/route",
+      "page": "/api/chat/goal-tracker/route",
+      "matchers": [
+        {
+          "regexp": "^/api/chat/goal\\-tracker$",
+          "originalSource": "/api/chat/goal-tracker"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "qiw4JeNX-8vtau8jn6Lvv",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "89i4TVlP8PjBdHVX2baaNu2umzu9zf2N6PkAgaYX6zA=",
+        "__NEXT_PREVIEW_MODE_ID": "5a8766ab5110e8216e759f2a1bbef148",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "09d83599a500909911e5458a61f17f5e3e8bac9323eab6ac1cd44ad9c2575861",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "ba36f05040b7ef530e6d527cf5faa84bbefa72a8420adafa3f7856d1262e75ae"
+      }
+    },
+    "/api/chat/reputation-analysis/route": {
+      "files": [
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/edge-chunks/763.js",
+        "server/app/api/chat/reputation-analysis/route.js"
+      ],
+      "name": "app/api/chat/reputation-analysis/route",
+      "page": "/api/chat/reputation-analysis/route",
+      "matchers": [
+        {
+          "regexp": "^/api/chat/reputation\\-analysis$",
+          "originalSource": "/api/chat/reputation-analysis"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "qiw4JeNX-8vtau8jn6Lvv",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "89i4TVlP8PjBdHVX2baaNu2umzu9zf2N6PkAgaYX6zA=",
+        "__NEXT_PREVIEW_MODE_ID": "5a8766ab5110e8216e759f2a1bbef148",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "09d83599a500909911e5458a61f17f5e3e8bac9323eab6ac1cd44ad9c2575861",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "ba36f05040b7ef530e6d527cf5faa84bbefa72a8420adafa3f7856d1262e75ae"
+      }
+    },
+    "/api/chat/transaction-analysis/route": {
+      "files": [
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/edge-chunks/763.js",
+        "server/app/api/chat/transaction-analysis/route.js"
+      ],
+      "name": "app/api/chat/transaction-analysis/route",
+      "page": "/api/chat/transaction-analysis/route",
+      "matchers": [
+        {
+          "regexp": "^/api/chat/transaction\\-analysis$",
+          "originalSource": "/api/chat/transaction-analysis"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "qiw4JeNX-8vtau8jn6Lvv",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "89i4TVlP8PjBdHVX2baaNu2umzu9zf2N6PkAgaYX6zA=",
+        "__NEXT_PREVIEW_MODE_ID": "5a8766ab5110e8216e759f2a1bbef148",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "09d83599a500909911e5458a61f17f5e3e8bac9323eab6ac1cd44ad9c2575861",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "ba36f05040b7ef530e6d527cf5faa84bbefa72a8420adafa3f7856d1262e75ae"
+      }
+    },
+    "/api/chat/cross-chain-strategy/route": {
+      "files": [
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/edge-chunks/763.js",
+        "server/app/api/chat/cross-chain-strategy/route.js"
+      ],
+      "name": "app/api/chat/cross-chain-strategy/route",
+      "page": "/api/chat/cross-chain-strategy/route",
+      "matchers": [
+        {
+          "regexp": "^/api/chat/cross\\-chain\\-strategy$",
+          "originalSource": "/api/chat/cross-chain-strategy"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "qiw4JeNX-8vtau8jn6Lvv",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "89i4TVlP8PjBdHVX2baaNu2umzu9zf2N6PkAgaYX6zA=",
+        "__NEXT_PREVIEW_MODE_ID": "5a8766ab5110e8216e759f2a1bbef148",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "09d83599a500909911e5458a61f17f5e3e8bac9323eab6ac1cd44ad9c2575861",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "ba36f05040b7ef530e6d527cf5faa84bbefa72a8420adafa3f7856d1262e75ae"
+      }
+    }
+  },
+  "sortedMiddleware": []
+}

@@ -34,7 +34,7 @@ Your role is to:
 Always provide concrete, actionable strategies with clear reasoning. Consider gas costs, time investment, and potential returns. Use a strategic, advisory tone while remaining accessible.`
 
   const result = await streamText({
-    model: openai('gpt-4-turbo'),
+    model: openai('gpt-4o-mini') as any,
     system: systemPrompt,
     messages,
     maxTokens: 1000,
