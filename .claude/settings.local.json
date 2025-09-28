@@ -12,7 +12,8 @@
       "Read(//d//**)",
       "Bash(npx hardhat:*)",
       "WebFetch(domain:dashboard.evm-testnet.kadena.io)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
