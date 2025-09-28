@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/api/chat/goal-tracker":{},"/api/chat/zk-proof-advisor":{},"/api/chat/cross-chain-strategy":{},"/api/chat/reputation-analysis":{},"/api/chat/transaction-analysis":{}}}
+{"version":1,"functions":{"/api/chat/reputation-analysis":{},"/api/chat/transaction-analysis":{},"/api/chat/zk-proof-advisor":{},"/api/chat/goal-tracker":{},"/api/chat/cross-chain-strategy":{}}}
