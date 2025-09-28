@@ -10,4 +10,17 @@ export default defineConfig({
   define: {
     global: 'globalThis',
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          blockchain: ['ethers'],
+          ui: ['lucide-react', 'framer-motion'],
+          utils: ['axios', '@tanstack/react-query']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  }
 })

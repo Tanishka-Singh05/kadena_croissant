@@ -7,6 +7,7 @@ import ActivityFeed from './ActivityFeed'
 import ChainSelector from './ChainSelector'
 import TestTransaction from './TestTransaction'
 import VerificationStatus from './VerificationStatus'
+import AIAgents from './AIAgents'
 
 const Dashboard = () => {
   const { account, chainId, isKadenaChain } = useWallet()
@@ -131,6 +132,9 @@ const Dashboard = () => {
           levelProgress={getLevelProgress()}
         />
       </div>
+
+      {/* AI Agents Section */}
+      <AIAgents />
 
       {/* Test Transaction Component */}
       <TestTransaction selectedChain={selectedChain} />
