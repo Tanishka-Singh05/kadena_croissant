@@ -7,7 +7,7 @@ A privacy-preserving, multi-chain reputation system built on Kadena's Chainweb E
 ## 🎉 **SUCCESSFULLY DEPLOYED!**
 
 ✅ **Contract Deployed**: `0xd690A2abB2Da7957e36CE70d844eCBE8cec06f50` on Chain 5920
-✅ **Frontend Running**: http://localhost:3001
+✅ **Project Live**: (https://kadenacroissant.vercel.app/)
 ✅ **All Systems Operational**: Ready for testing and demo!
 
 ## 🌟 Features
