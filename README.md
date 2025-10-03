@@ -142,9 +142,10 @@ Add these networks to MetaMask manually:
 #### 9. **Test the Application**
 1. Visit `http://localhost:3000`
 2. Connect your MetaMask wallet
-3. Switch between chains using the chain selector
-4. Execute test transactions to see reputation updates
-5. Watch your scores update in real-time!
+3. Add testnet faucet from https://tools.kadena.io/faucet/evm
+4. Switch between chains using the chain selector
+5. Execute test transactions to see reputation updates
+6. Watch your scores update in real-time!
 
 ### Quick Commands Reference
 
